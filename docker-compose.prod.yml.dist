@@ -1,0 +1,51 @@
+
+version: '2'
+
+services:
+    app:
+        build:
+            context: ./docker/${APP_ENV}/app
+            args:
+                GOGS_VERSION: ${GOGS_VERSION}
+        restart: always
+        networks:
+            - gogs
+        depends_on:
+            - db
+        ports:
+            - "9022:22"
+        volumes:
+            - app_data:${GOGS_DATA_DIR}
+            - ${APP_PATH}/var/logs:${GOGS_LOGS_DIR}
+            - ${APP_PATH}/var/run:${GOGS_SOCK_DIR}
+
+    db:
+        image: postgres:${POSTGRES_VERSION}
+        restart: always
+        networks:
+            - gogs
+        environment:
+            POSTGRES_DB: ${POSTGRES_DB}
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            PGDATA: ${POSTGRES_DATA_DIR}
+        volumes:
+            - db_data:${POSTGRES_DATA_DIR}
+
+networks:
+    gogs:
+        driver: bridge
+
+volumes:
+    app_data:
+        driver: local
+        driver_opts:
+            type: none
+            device: ${PWD}/data/app
+            o: bind
+    db_data:
+        driver: local
+        driver_opts:
+            type: none
+            device: ${PWD}/data/db/data
+            o: bind

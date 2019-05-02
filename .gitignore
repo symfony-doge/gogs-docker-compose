@@ -1,0 +1,16 @@
+.idea
+
+.env
+docker-compose.yml
+
+!/data
+/data/app/*
+!data/app/.gitkeep
+
+!/data
+/data/db/*
+!data/db/.gitkeep
+
+!/var
+/var/logs/*
+!var/logs/.gitkeep

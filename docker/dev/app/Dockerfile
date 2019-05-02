@@ -1,0 +1,4 @@
+
+ARG GOGS_VERSION
+
+FROM gogs/gogs:${GOGS_VERSION}
