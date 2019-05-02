@@ -17,7 +17,7 @@ Why you probably will pick this configuration for your [Gogs](https://github.com
 Clone the repository and run an automated setup script:
 
 ```
-$ clone git@github.com:symfony-doge/gogs-docker-compose.git gogs-docker-compose && cd "$_"
+$ git clone git@github.com:symfony-doge/gogs-docker-compose.git gogs-docker-compose && cd "$_"
 $ bin/install_http.sh
 ```
 
